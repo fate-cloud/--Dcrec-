@@ -1,0 +1,28 @@
+INFO:root:Namespace(model_name='Dcrec', model_mode='')
+INFO:root:--------------------------------------------- BEGIN: 2025-12-05 16:21:02 ---------------------------------------------
+INFO:root:
+===========================================
+ Arguments          | Values               
+===========================================
+ batch_size         | 256                 
+ data_appendix      |                     
+ dataset            | Grocery_and_Gourm...
+ dropout            | 0                   
+ early_stop         | 10                  
+ epoch              | 20                  
+ eval_batch_size    | 256                 
+ gpu                | 0                   
+ history_max        | 20                  
+ l2                 | 0                   
+ lr                 | 0.02                
+ main_metric        |                     
+ num_neg            | 1                   
+ num_workers        | 0                   
+ optimizer          | Adam                
+ random_seed        | 0                   
+ save_final_results | 1                   
+ test_all           | 0                   
+ topk               | 5,10,20,50          
+===========================================
+INFO:root:Device: cuda
+INFO:root:Load corpus from ..\data\Grocery_and_Gourmet_Food\DcrecReader.pkl

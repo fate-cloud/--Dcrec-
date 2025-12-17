@@ -1,0 +1,135 @@
+INFO:root:Namespace(model_name='Dcrec', model_mode='')
+INFO:root:--------------------------------------------- BEGIN: 2025-12-07 23:10:33 ---------------------------------------------
+INFO:root:
+===========================================
+ Arguments          | Values               
+===========================================
+ batch_size         | 256                 
+ data_appendix      |                     
+ dataset            | Grocery_and_Gourm...
+ dropout            | 0.2                 
+ early_stop         | 10                  
+ epoch              | 20                  
+ eval_batch_size    | 256                 
+ gpu                | 0                   
+ history_max        | 20                  
+ l2                 | 0                   
+ lr                 | 0.0017              
+ main_metric        |                     
+ num_neg            | 1                   
+ num_workers        | 0                   
+ optimizer          | Adam                
+ random_seed        | 0                   
+ save_final_results | 1                   
+ test_all           | 0                   
+ topk               | 5,10,20,50          
+===========================================
+INFO:root:Device: cuda
+INFO:root:Load corpus from ..\data\Grocery_and_Gourmet_Food\DcrecReader.pkl
+INFO:root:#params: 673536
+INFO:root:Dcrec(
+  (emb_layer): TransformerEmbedding(
+    (token_emb): Embedding(8715, 64, padding_idx=0)
+    (position_emb): Embedding(50, 64)
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (transformer_layers): ModuleList(
+    (0): TransformerLayer(
+      (attention): MultiHeadAttention(
+        (linear_layers): ModuleList(
+          (0): Linear(in_features=64, out_features=64, bias=True)
+          (1): Linear(in_features=64, out_features=64, bias=True)
+          (2): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (output_linear): Linear(in_features=64, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (feed_forward): PositionwiseFeedForward(
+        (w_1): Linear(in_features=64, out_features=256, bias=True)
+        (w_2): Linear(in_features=256, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (activation): GELU(approximate=none)
+      )
+      (input_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (output_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (1): TransformerLayer(
+      (attention): MultiHeadAttention(
+        (linear_layers): ModuleList(
+          (0): Linear(in_features=64, out_features=64, bias=True)
+          (1): Linear(in_features=64, out_features=64, bias=True)
+          (2): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (output_linear): Linear(in_features=64, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (feed_forward): PositionwiseFeedForward(
+        (w_1): Linear(in_features=64, out_features=256, bias=True)
+        (w_2): Linear(in_features=256, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (activation): GELU(approximate=none)
+      )
+      (input_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (output_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+  )
+  (loss_fct): CrossEntropyLoss()
+  (dropout): Dropout(p=0.1, inplace=False)
+  (layernorm): LayerNorm((64,), eps=1e-12, elementwise_affine=True)
+  (contrastive_learning_layer): CLLayer(
+    (fc1): Linear(in_features=64, out_features=64, bias=True)
+    (fc2): Linear(in_features=64, out_features=64, bias=True)
+  )
+  (gcn): LightGCN(
+    (layers): ModuleList(
+      (0): GraphConv(in=64, out=64, normalization=both, activation=None)
+      (1): GraphConv(in=64, out=64, normalization=both, activation=None)
+    )
+  )
+)
+INFO:root:Test Before Training: (HR@5:0.0432,NDCG@5:0.0251,HR@10:0.0913,NDCG@10:0.0404,HR@20:0.1911,NDCG@20:0.0653,HR@50:0.5031,NDCG@50:0.1261)
+INFO:root:Optimizer: Adam
+INFO:root: test=(HR@5:0.2931,NDCG@5:0.2081,HR@10:0.3753,NDCG@10:0.2347,HR@20:0.4841,NDCG@20:0.2620,HR@50:0.6892,NDCG@50:0.3023) [1.0 s]
+INFO:root: test=(HR@5:0.3279,NDCG@5:0.2419,HR@10:0.4077,NDCG@10:0.2677,HR@20:0.5006,NDCG@20:0.2912,HR@50:0.6965,NDCG@50:0.3296) [1.2 s]
+INFO:root: test=(HR@5:0.3437,NDCG@5:0.2592,HR@10:0.4192,NDCG@10:0.2836,HR@20:0.5182,NDCG@20:0.3085,HR@50:0.7162,NDCG@50:0.3474) [1.0 s]
+INFO:root: test=(HR@5:0.3447,NDCG@5:0.2573,HR@10:0.4260,NDCG@10:0.2836,HR@20:0.5291,NDCG@20:0.3095,HR@50:0.7220,NDCG@50:0.3474) [1.1 s]
+INFO:root: test=(HR@5:0.3646,NDCG@5:0.2778,HR@10:0.4427,NDCG@10:0.3030,HR@20:0.5421,NDCG@20:0.3280,HR@50:0.7325,NDCG@50:0.3654) [1.2 s]
+INFO:root: test=(HR@5:0.3682,NDCG@5:0.2814,HR@10:0.4485,NDCG@10:0.3073,HR@20:0.5492,NDCG@20:0.3327,HR@50:0.7367,NDCG@50:0.3695) [1.2 s]
+INFO:root: test=(HR@5:0.3793,NDCG@5:0.2882,HR@10:0.4660,NDCG@10:0.3161,HR@20:0.5644,NDCG@20:0.3409,HR@50:0.7651,NDCG@50:0.3803) [0.8 s]
+INFO:root: test=(HR@5:0.3831,NDCG@5:0.2947,HR@10:0.4686,NDCG@10:0.3223,HR@20:0.5719,NDCG@20:0.3483,HR@50:0.7633,NDCG@50:0.3860) [0.8 s]
+INFO:root: test=(HR@5:0.3876,NDCG@5:0.2984,HR@10:0.4765,NDCG@10:0.3271,HR@20:0.5827,NDCG@20:0.3538,HR@50:0.7734,NDCG@50:0.3914) [0.9 s]
+INFO:root: test=(HR@5:0.3915,NDCG@5:0.3015,HR@10:0.4780,NDCG@10:0.3294,HR@20:0.5863,NDCG@20:0.3567,HR@50:0.7827,NDCG@50:0.3955) [0.9 s]
+INFO:root: test=(HR@5:0.3942,NDCG@5:0.3038,HR@10:0.4842,NDCG@10:0.3328,HR@20:0.5849,NDCG@20:0.3581,HR@50:0.7805,NDCG@50:0.3968) [1.1 s]
+INFO:root: test=(HR@5:0.3970,NDCG@5:0.3082,HR@10:0.4801,NDCG@10:0.3351,HR@20:0.5840,NDCG@20:0.3613,HR@50:0.7844,NDCG@50:0.4009) [1.1 s]
+INFO:root: test=(HR@5:0.3934,NDCG@5:0.3032,HR@10:0.4803,NDCG@10:0.3312,HR@20:0.5893,NDCG@20:0.3587,HR@50:0.7830,NDCG@50:0.3967) [1.2 s]
+INFO:root: test=(HR@5:0.3949,NDCG@5:0.3033,HR@10:0.4795,NDCG@10:0.3305,HR@20:0.5878,NDCG@20:0.3577,HR@50:0.7891,NDCG@50:0.3974) [1.2 s]
+INFO:root: test=(HR@5:0.3921,NDCG@5:0.3022,HR@10:0.4777,NDCG@10:0.3298,HR@20:0.5833,NDCG@20:0.3564,HR@50:0.7862,NDCG@50:0.3964) [1.0 s]
+INFO:root: test=(HR@5:0.4012,NDCG@5:0.3104,HR@10:0.4884,NDCG@10:0.3385,HR@20:0.5936,NDCG@20:0.3650,HR@50:0.7967,NDCG@50:0.4049) [1.3 s]
+INFO:root: test=(HR@5:0.3987,NDCG@5:0.3084,HR@10:0.4842,NDCG@10:0.3361,HR@20:0.5988,NDCG@20:0.3650,HR@50:0.7980,NDCG@50:0.4042) [0.9 s]
+INFO:root: test=(HR@5:0.3999,NDCG@5:0.3086,HR@10:0.4896,NDCG@10:0.3375,HR@20:0.5970,NDCG@20:0.3645,HR@50:0.7936,NDCG@50:0.4032) [0.9 s]
+INFO:root: test=(HR@5:0.4003,NDCG@5:0.3081,HR@10:0.4876,NDCG@10:0.3363,HR@20:0.5952,NDCG@20:0.3633,HR@50:0.7944,NDCG@50:0.4026) [1.0 s]
+INFO:root: test=(HR@5:0.4006,NDCG@5:0.3101,HR@10:0.4910,NDCG@10:0.3392,HR@20:0.5978,NDCG@20:0.3661,HR@50:0.7972,NDCG@50:0.4054) [1.1 s]
+INFO:root:
+Dev  After Training: (HR@5:0.4448,NDCG@5:0.3500,HR@10:0.5295,NDCG@10:0.3774,HR@20:0.6322,NDCG@20:0.4033,HR@50:0.8200,NDCG@50:0.4402)
+INFO:root:
+Test After Training: (HR@5:0.4006,NDCG@5:0.3101,HR@10:0.4908,NDCG@10:0.3391,HR@20:0.5978,NDCG@20:0.3661,HR@50:0.7970,NDCG@50:0.4054)
+INFO:root:Saving top-100 recommendation results to: ../log/Dcrec\Dcrec__Grocery_and_Gourmet_Food__0__lr=0\rec-Dcrec-dev.csv
+INFO:root:dev Prediction results saved!
+INFO:root:Saving top-100 recommendation results to: ../log/Dcrec\Dcrec__Grocery_and_Gourmet_Food__0__lr=0\rec-Dcrec-test.csv
+INFO:root:test Prediction results saved!
+INFO:root:
+--------------------------------------------- END: 2025-12-07 23:36:12 ---------------------------------------------

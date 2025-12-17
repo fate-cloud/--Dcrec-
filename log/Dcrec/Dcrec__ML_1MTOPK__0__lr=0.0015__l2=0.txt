@@ -1,0 +1,236 @@
+INFO:root:Namespace(model_name='Dcrec', model_mode='')
+INFO:root:--------------------------------------------- BEGIN: 2025-12-12 09:58:01 ---------------------------------------------
+INFO:root:
+=================================
+ Arguments          | Values     
+=================================
+ batch_size         | 256       
+ data_appendix      |           
+ dataset            | ML_1MTOPK 
+ dropout            | 0.2       
+ early_stop         | 10        
+ epoch              | 20        
+ eval_batch_size    | 256       
+ gpu                | 0         
+ history_max        | 20        
+ l2                 | 0         
+ lr                 | 0.0015    
+ main_metric        |           
+ num_neg            | 1         
+ num_workers        | 0         
+ optimizer          | Adam      
+ random_seed        | 0         
+ save_final_results | 1         
+ test_all           | 0         
+ topk               | 5,10,20,50
+=================================
+INFO:root:Device: cuda
+INFO:root:Load corpus from ..\data\MovieLens_1M\ML_1MTOPK\DcrecReader.pkl
+INFO:root:#params: 315904
+INFO:root:Dcrec(
+  (emb_layer): TransformerEmbedding(
+    (token_emb): Embedding(3127, 64, padding_idx=0)
+    (position_emb): Embedding(50, 64)
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (transformer_layers): ModuleList(
+    (0): TransformerLayer(
+      (attention): MultiHeadAttention(
+        (linear_layers): ModuleList(
+          (0): Linear(in_features=64, out_features=64, bias=True)
+          (1): Linear(in_features=64, out_features=64, bias=True)
+          (2): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (output_linear): Linear(in_features=64, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (feed_forward): PositionwiseFeedForward(
+        (w_1): Linear(in_features=64, out_features=256, bias=True)
+        (w_2): Linear(in_features=256, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (activation): GELU(approximate=none)
+      )
+      (input_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (output_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (1): TransformerLayer(
+      (attention): MultiHeadAttention(
+        (linear_layers): ModuleList(
+          (0): Linear(in_features=64, out_features=64, bias=True)
+          (1): Linear(in_features=64, out_features=64, bias=True)
+          (2): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (output_linear): Linear(in_features=64, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (feed_forward): PositionwiseFeedForward(
+        (w_1): Linear(in_features=64, out_features=256, bias=True)
+        (w_2): Linear(in_features=256, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (activation): GELU(approximate=none)
+      )
+      (input_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (output_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+  )
+  (loss_fct): CrossEntropyLoss()
+  (dropout): Dropout(p=0.1, inplace=False)
+  (layernorm): LayerNorm((64,), eps=1e-12, elementwise_affine=True)
+  (contrastive_learning_layer): CLLayer(
+    (fc1): Linear(in_features=64, out_features=64, bias=True)
+    (fc2): Linear(in_features=64, out_features=64, bias=True)
+  )
+  (gcn): LightGCN(
+    (layers): ModuleList(
+      (0): GraphConv(in=64, out=64, normalization=both, activation=None)
+      (1): GraphConv(in=64, out=64, normalization=both, activation=None)
+    )
+  )
+)
+INFO:root:Test Before Training: (HR@5:0.0487,NDCG@5:0.0284,HR@10:0.0985,NDCG@10:0.0442,HR@20:0.1973,NDCG@20:0.0688,HR@50:0.5000,NDCG@50:0.1280)
+INFO:root:Optimizer: Adam
+INFO:root: test=(HR@5:0.4749,NDCG@5:0.3494,HR@10:0.5901,NDCG@10:0.3865,HR@20:0.7209,NDCG@20:0.4196,HR@50:0.8740,NDCG@50:0.4501) [1.4 s]
+INFO:root: test=(HR@5:0.5003,NDCG@5:0.3683,HR@10:0.6176,NDCG@10:0.4063,HR@20:0.7495,NDCG@20:0.4396,HR@50:0.8925,NDCG@50:0.4682) [0.2 s]
+INFO:root: test=(HR@5:0.4986,NDCG@5:0.3729,HR@10:0.6256,NDCG@10:0.4139,HR@20:0.7509,NDCG@20:0.4455,HR@50:0.8907,NDCG@50:0.4736) [0.3 s]
+INFO:root: test=(HR@5:0.5031,NDCG@5:0.3722,HR@10:0.6214,NDCG@10:0.4103,HR@20:0.7477,NDCG@20:0.4424,HR@50:0.8904,NDCG@50:0.4710) [0.8 s]
+INFO:root: test=(HR@5:0.5129,NDCG@5:0.3865,HR@10:0.6360,NDCG@10:0.4259,HR@20:0.7637,NDCG@20:0.4582,HR@50:0.8963,NDCG@50:0.4846) [1.1 s]
+INFO:root: test=(HR@5:0.5139,NDCG@5:0.3866,HR@10:0.6451,NDCG@10:0.4291,HR@20:0.7651,NDCG@20:0.4597,HR@50:0.9001,NDCG@50:0.4867) [0.4 s]
+INFO:root: test=(HR@5:0.5164,NDCG@5:0.3856,HR@10:0.6416,NDCG@10:0.4262,HR@20:0.7773,NDCG@20:0.4606,HR@50:0.9008,NDCG@50:0.4854) [0.3 s]
+INFO:root: test=(HR@5:0.5077,NDCG@5:0.3787,HR@10:0.6305,NDCG@10:0.4181,HR@20:0.7589,NDCG@20:0.4507,HR@50:0.8935,NDCG@50:0.4776) [0.2 s]
+INFO:root: test=(HR@5:0.5146,NDCG@5:0.3885,HR@10:0.6479,NDCG@10:0.4316,HR@20:0.7742,NDCG@20:0.4639,HR@50:0.9019,NDCG@50:0.4893) [0.3 s]
+INFO:root: test=(HR@5:0.5160,NDCG@5:0.3849,HR@10:0.6461,NDCG@10:0.4269,HR@20:0.7711,NDCG@20:0.4587,HR@50:0.8987,NDCG@50:0.4841) [0.3 s]
+INFO:root: test=(HR@5:0.5139,NDCG@5:0.3868,HR@10:0.6409,NDCG@10:0.4279,HR@20:0.7735,NDCG@20:0.4616,HR@50:0.9005,NDCG@50:0.4871) [0.3 s]
+INFO:root: test=(HR@5:0.5219,NDCG@5:0.3941,HR@10:0.6531,NDCG@10:0.4367,HR@20:0.7745,NDCG@20:0.4675,HR@50:0.9071,NDCG@50:0.4940) [0.3 s]
+INFO:root: test=(HR@5:0.5188,NDCG@5:0.3895,HR@10:0.6601,NDCG@10:0.4352,HR@20:0.7728,NDCG@20:0.4638,HR@50:0.9068,NDCG@50:0.4905) [0.3 s]
+INFO:root: test=(HR@5:0.5143,NDCG@5:0.3872,HR@10:0.6559,NDCG@10:0.4329,HR@20:0.7714,NDCG@20:0.4621,HR@50:0.9047,NDCG@50:0.4889) [0.3 s]
+INFO:root: test=(HR@5:0.5254,NDCG@5:0.3894,HR@10:0.6534,NDCG@10:0.4307,HR@20:0.7711,NDCG@20:0.4605,HR@50:0.9106,NDCG@50:0.4885) [0.4 s]
+INFO:root: test=(HR@5:0.5164,NDCG@5:0.3896,HR@10:0.6527,NDCG@10:0.4335,HR@20:0.7777,NDCG@20:0.4651,HR@50:0.9102,NDCG@50:0.4916) [0.3 s]
+INFO:root: test=(HR@5:0.5191,NDCG@5:0.3923,HR@10:0.6621,NDCG@10:0.4387,HR@20:0.7815,NDCG@20:0.4689,HR@50:0.9130,NDCG@50:0.4953) [0.2 s]
+INFO:root: test=(HR@5:0.5264,NDCG@5:0.3911,HR@10:0.6559,NDCG@10:0.4329,HR@20:0.7756,NDCG@20:0.4632,HR@50:0.9116,NDCG@50:0.4903) [0.5 s]
+INFO:root: test=(HR@5:0.5167,NDCG@5:0.3866,HR@10:0.6524,NDCG@10:0.4304,HR@20:0.7745,NDCG@20:0.4613,HR@50:0.9074,NDCG@50:0.4878) [0.3 s]
+INFO:root: test=(HR@5:0.5299,NDCG@5:0.3957,HR@10:0.6660,NDCG@10:0.4396,HR@20:0.7804,NDCG@20:0.4685,HR@50:0.9168,NDCG@50:0.4956) [0.3 s]
+INFO:root:
+Dev  After Training: (HR@5:0.5191,NDCG@5:0.3796,HR@10:0.6573,NDCG@10:0.4243,HR@20:0.7990,NDCG@20:0.4602,HR@50:0.9235,NDCG@50:0.4850)
+INFO:root:
+Test After Training: (HR@5:0.5313,NDCG@5:0.3962,HR@10:0.6653,NDCG@10:0.4394,HR@20:0.7797,NDCG@20:0.4683,HR@50:0.9168,NDCG@50:0.4955)
+INFO:root:Saving top-100 recommendation results to: ../log/Dcrec\Dcrec__ML_1MTOPK__0__lr=0\rec-Dcrec-dev.csv
+INFO:root:dev Prediction results saved!
+INFO:root:Saving top-100 recommendation results to: ../log/Dcrec\Dcrec__ML_1MTOPK__0__lr=0\rec-Dcrec-test.csv
+INFO:root:test Prediction results saved!
+INFO:root:
+--------------------------------------------- END: 2025-12-12 14:26:28 ---------------------------------------------
+INFO:root:Namespace(model_name='Dcrec', model_mode='')
+INFO:root:--------------------------------------------- BEGIN: 2025-12-12 16:41:00 ---------------------------------------------
+INFO:root:
+=================================
+ Arguments          | Values     
+=================================
+ batch_size         | 256       
+ data_appendix      |           
+ dataset            | ML_1MTOPK 
+ dropout            | 0.2       
+ early_stop         | 10        
+ epoch              | 20        
+ eval_batch_size    | 256       
+ gpu                | 0         
+ history_max        | 20        
+ l2                 | 0         
+ lr                 | 0.0015    
+ main_metric        |           
+ num_neg            | 1         
+ num_workers        | 0         
+ optimizer          | Adam      
+ random_seed        | 0         
+ save_final_results | 1         
+ test_all           | 0         
+ topk               | 5,10,20,50
+=================================
+INFO:root:Device: cuda
+INFO:root:Load corpus from ..\data\MovieLens_1M\ML_1MTOPK\DcrecReader.pkl
+INFO:root:#params: 315904
+INFO:root:Dcrec(
+  (emb_layer): TransformerEmbedding(
+    (token_emb): Embedding(3127, 64, padding_idx=0)
+    (position_emb): Embedding(50, 64)
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (transformer_layers): ModuleList(
+    (0): TransformerLayer(
+      (attention): MultiHeadAttention(
+        (linear_layers): ModuleList(
+          (0): Linear(in_features=64, out_features=64, bias=True)
+          (1): Linear(in_features=64, out_features=64, bias=True)
+          (2): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (output_linear): Linear(in_features=64, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (feed_forward): PositionwiseFeedForward(
+        (w_1): Linear(in_features=64, out_features=256, bias=True)
+        (w_2): Linear(in_features=256, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (activation): GELU(approximate=none)
+      )
+      (input_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (output_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (1): TransformerLayer(
+      (attention): MultiHeadAttention(
+        (linear_layers): ModuleList(
+          (0): Linear(in_features=64, out_features=64, bias=True)
+          (1): Linear(in_features=64, out_features=64, bias=True)
+          (2): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (output_linear): Linear(in_features=64, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (feed_forward): PositionwiseFeedForward(
+        (w_1): Linear(in_features=64, out_features=256, bias=True)
+        (w_2): Linear(in_features=256, out_features=64, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (activation): GELU(approximate=none)
+      )
+      (input_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (output_sublayer): ResidualConnection(
+        (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+  )
+  (loss_fct): CrossEntropyLoss()
+  (dropout): Dropout(p=0.1, inplace=False)
+  (layernorm): LayerNorm((64,), eps=1e-12, elementwise_affine=True)
+  (contrastive_learning_layer): CLLayer(
+    (fc1): Linear(in_features=64, out_features=64, bias=True)
+    (fc2): Linear(in_features=64, out_features=64, bias=True)
+  )
+  (gcn): GCN(
+    (layer): GraphConv(in=64, out=64, normalization=both, activation=None)
+    (act): GELU(approximate=none)
+  )
+)
