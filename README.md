@@ -46,7 +46,7 @@
 pip install -r requirements.txt
 ```
 ```bash
-cd Rechorus-Dcrec
+cd --Dcrec--master
 cd src
 python main.py --model_name Dcrec --epoch 20  --path ..\data\MovieLens_1M\ --dataset ML_1MTOPK   --lr 0.0015 --dropout 0.2
 python main.py --model_name Dcrec --epoch 20  --path ..\data\ \ --lr 0.001 --dropout 0.2
